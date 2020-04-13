@@ -37,11 +37,7 @@ def create_app():
     return current_app
 
 
-def register_blueprints_api(app):
-    """
-    from blueprints.api import api_views as api_bp
-    from blueprints.api import user_views as user_routes_bp
-    app.register_blueprint(api_bp.blueprint)
-    app.register_blueprint(user_routes_bp.user_bp)
-    app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
-    """
+def register_blueprints_api(curr_app):
+    from blueprints import routes as api_bp
+    curr_app.register_blueprint(api_bp.blueprint)
+    # app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
