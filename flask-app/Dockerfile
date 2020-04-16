@@ -1,7 +1,9 @@
 FROM python:3.7.3
 
-COPY app /usr/src/app
-COPY commit /usr/src/app/commit
+COPY /app /usr/src/app
+COPY ./requirements.txt /usr/src/app
+COPY app/commit /usr/src/app/commit
+
 WORKDIR /usr/src/app
 
 RUN pip install .
@@ -13,5 +15,9 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 # EXPOSE 5000
 
 # Run run.py when the container launches
-ENTRYPOINT ["python"]
-CMD ["run.py"]
+# ENTRYPOINT ["python"]
+# CMD ["run.py"]
+
+# ENTRYPOINT ["python3"]
+# run the command to start uWSGI
+CMD ["uwsgi", "app.ini"]

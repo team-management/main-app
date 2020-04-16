@@ -1,7 +1,7 @@
 all:
 	git rev-parse HEAD > commit
 	docker build --tag pre -t rugby-dev/api .
-	docker build --tag prod -t rugby-dev/api .
+	docker build --tag prod -t rugby-prod/api .
 
 
 dev:
