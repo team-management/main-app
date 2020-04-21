@@ -1,10 +1,8 @@
-# NGINX Dockerization
+# Application
 
-This is a Docker container with NGINX Web Server installed
+This application is made based in Docker Containers
 
 ## Installation
-
-
 
 ```bash
 
@@ -12,6 +10,13 @@ This is a Docker container with NGINX Web Server installed
 
 ## Useful commands
 
+docker-compose build
+docker-compose up
+docker-compose up --build
+
+docker-compose images
+docker-compose ps
+docker-compose stop
 
 
 ## Usage

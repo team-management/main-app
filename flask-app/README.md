@@ -1,17 +1,25 @@
-# NGINX Dockerization
-
-This is a Docker container with NGINX Web Server installed
+# Dockerization
+This is a Docker container with Flask APP and uWSGI
 
 ## Installation
-
-
 
 ```bash
 
 ```
 
 ## Useful commands
+# To create virtual env activate it
+python -m venv env
 
+# To activate it
+source env/bin/activate
+
+# uWSGI Commands
+uwsgi --ini app.ini
+
+# uWSGItop Commands
+uwsgi --ini app.ini --stats /tmp/stats.sock
+uwsgitop /tmp/stats.sock
 
 
 ## Usage

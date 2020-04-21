@@ -1,0 +1,45 @@
+version: "3.5"
+
+services:
+  rugby-dev:
+    image: rugby-dev-img
+    # Instructs Docker to build the image using the Dockerfile found in the flask-app directory (relative to the docker-compose.yml file)
+    build:
+      context: ./flask-app
+      dockerfile: Dockerfile
+    # Gives our container the name of flask, also assigning it that hostname
+    container_name: rugby-dev
+    # Makes the container always restart
+    restart: always
+    # A place for us to define environment variables for the container.
+    environment:
+      - APP_NAME=rugbyDevApp
+    # Exposes internal ports to other containers and services on the same network.
+    # Not possible to access from outside worl
+    expose:
+      - 8080
+    volumes:
+      - ./flask-app/app:/etc/usr/src/app
+
+  nginx:
+    image: nginx-img
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    # Gives our container the name of nginx, also assigning it that hostname
+    container_name: nginx
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # - ./nginx/error.log:/etc/nginx/error_log.log
+      - ./nginx/cache/:/etc/nginx/cache
+      # - /etc/letsencrypt/:/etc/letsencrypt/
+    # ports are mapped as HOST:CONTAINER and will expose ports to the outside world, which in our case has mapped
+    # port 80 on the host machine to port 80 of our Nginx container.
+    ports:
+      - 80:80
+      - 443:443
+    # Create a virtual hostname rugby-dev in our nginx container and setup the networking so that we can
+    # route the incoming data to our uWSGI app living in a different container.
+    depends_on:
+      - rugby-dev
