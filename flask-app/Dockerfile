@@ -2,7 +2,7 @@ FROM python:3.7.3
 
 COPY /app /usr/src/app
 COPY ./requirements.txt /usr/src/app
-COPY app/commit /usr/src/app/commit
+COPY /commit /usr/src/app/commit
 
 WORKDIR /usr/src/app
 
